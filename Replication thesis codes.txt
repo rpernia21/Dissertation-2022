@@ -1,0 +1,255 @@
+Replication Codes Thesis
+
+Indonesia
+
+*Replication code
+
+*Indonesia
+
+clear
+use merge.final_Indonesia.version.dta
+
+
+*fixed effects
+xtset SurveyYear
+
+xtreg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education
+
+esttab, replace se
+
+estim stor m1
+
+*create dichotomous DV
+
+sum PolTrust, detail 
+
+* To check for median : 2.714286 
+
+recode PolTrust 1/2.71 = 0 2.71/4 = 1, gen(PolTrustRE) 
+tab PolTrustRE
+
+*logit models
+
+xtlogit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m2
+
+logistic PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+estim stor m3
+
+*export results
+esttab m1 m2 m3 using Thesis.Table99.rtf, replace se stat(N aic bic r2 r2_a)
+
+
+*Replication code
+
+*Taiwan
+
+clear
+use merge.final_Taiwan_2021version.dta
+
+*create dichotomous DV
+
+sum PolTrust, detail 
+
+* To check for median :  2.285714 
+
+recode PolTrust 1/2.286 = 0 2.286/4 = 1, gen(PolTrustRE) 
+tab PolTrustRE
+
+*OLS models
+reg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m1
+
+*fixed effects
+xtset SurveyYear
+
+xtreg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education
+
+esttab, replace se
+
+estim stor m2
+
+
+*logit models
+
+xtlogit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m3
+
+logistic PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+estim stor m3
+
+*export results
+esttab m1 m2 m3 using Taiwan_Thesis.Table98.rtf, replace se stat(N r2 r2_a aic bic)
+
+
+
+
+*Replication code
+
+*Taiwan
+
+clear
+use merge.final_Taiwan_2021version.dta
+
+*create dichotomous DV
+
+sum PolTrust, detail 
+
+* To check for median :  2.285714 
+
+recode PolTrust 1/2.286 = 0 2.286/4 = 1, gen(PolTrustRE) 
+tab PolTrustRE
+
+*OLS models
+reg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m1
+
+*fixed effects
+xtset SurveyYear
+
+xtreg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m2
+
+
+*logit models
+
+logit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m3
+
+*fixed-effects logit
+
+xtlogit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+
+estim stor m4
+
+
+*export results
+esttab m1 m2 m3 m4 using Taiwan_Thesis.Table96.rtf, replace se stat(N r2 r2_a aic bic)
+
+
+
+
+*Replication code
+
+*Indonesia
+
+clear
+use merge.final_Indonesia.version.dta
+
+
+*create dichotomous DV
+
+sum PolTrust, detail 
+
+* To check for median : 2.714286 
+recode PolTrust 1/2.71 = 0 2.71/4 = 1, gen(PolTrustRE) 
+tab PolTrustRE
+
+
+*Model 1: OLS
+reg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m1
+
+
+*Model 2: OLS, Fixed-effects
+xtset SurveyYear
+
+xtreg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m2
+
+
+*Model 3: Logit models
+logit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m3
+
+*Model 4: Logit, fixed-effects
+
+xtlogit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m4
+
+
+*export results
+esttab m1 m2 m3 m4 using Indonesia_Thesis.Table100.rtf, replace se stat(N r2 r2_a aic bic)
+
+
+*Replication code
+
+*South Korea
+
+clear
+use merge.final_S.Korea_2021version.dta
+
+
+*create dichotomous DV
+
+sum PolTrust, detail 
+
+* To check for median : 2.142857 
+recode PolTrust 1/2.14 = 0 2.14/4 = 1, gen(PolTrustRE) 
+tab PolTrustRE
+
+
+*Model 1: OLS
+reg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m1
+
+
+*Model 2: OLS, Fixed-effects
+xtset SurveyYear
+
+xtreg PolTrust AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m2
+
+
+*Model 3: Logit models
+logit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m3
+
+*Model 4: Logit, fixed-effects
+
+xtlogit PolTrustRE AuthoritarianValues PresentEconEval ProspectiveFamEcon FollowParents ConflictAvoidance PolInterest SocialTrust DemSatisfaction RegimeSatisfaction Age Gender IncomeGroup Urbanization Education i.SurveyYear
+
+esttab, replace se
+estim stor m4
+
+
+*export results
+esttab m1 m2 m3 m4 using South.Korea_Thesis.Table100.rtf, replace se stat(N r2 r2_a aic bic)
+
+

@@ -1,0 +1,876 @@
+*Korea regression
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Merge_final_S.Korea_Jan12_2021version.dta" 
+gen poltrust_new = ( TrustCourts + TrustNatGov + TrustParties + TrustCongress + TrustCivService + TrustPolice )/6
+sum poltrust_new, detail
+recode poltrust_new 1/2 = 0 2/4 = 1, gen(poltrust_new_re)
+tab poltrust_new_re
+tab SurveyYear
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m1
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m3
+tab SurveyYear
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2011
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2015
+estim stor m5
+esttab m1 m2 m3 m4 using korea.rtf, replace se stat(N r2 r2_a)
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2011
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest FollowParents SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2015
+estim stor m5
+esttab m1 m2 m3 m4 using korea1.rtf, replace se stat(N r2 r2_a)
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2011
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2015
+estim stor m5
+esttab m1 m2 m3 m4 using korea2.rtf, replace se stat(N r2 r2_a)
+reg poltrust_new c.MilitaryRule##c.DemSatisfaction PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Education i.SurveyYear
+esttab, replaces
+esttab, replace se
+reg poltrust_new MilitaryRule##DemSatisfaction PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Education i.SurveyYear
+reg poltrust_new c.MilitaryRule##c.DemSatisfaction PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Education i.SurveyYear
+reg poltrust_new c.MilitaryRule##c.DemSatisfaction PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Education i.SurveyYear
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+xtset SurveyYear
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+xtset SurveyYear
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2011
+estim stor m5
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2015
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using korea3.rtf, replace se stat(N r2 r2_a)
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education, fe
+esttab, replace se
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear , fe
+estim stor m7
+esttab m1 m2 m7 m3 m4 m5 m6 using korea4.rtf, replace se stat(N r2 r2_a)
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear , fe
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2003
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2011
+estim stor m5
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2015
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using korea4.rtf, replace se stat(N r2 r2_a)
+esttab m1 m2 m3 m4 m5 m6 using korea5.rtf, replace se stat(N r2 r2_a)
+
+
+
+
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear , fe
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2001
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2010
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2014
+estim stor m5
+esttab m1 m2 m3 m4 m5 using indonesia1.rtf, replace se stat(N r2 r2_a)
+
+
+*Taiwan regression
+
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m1
+xtreg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear , fe
+estim stor m2
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2001
+estim stor m3
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m4
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2010
+estim stor m5
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2014
+estim stor m6
+reg poltrust_new MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2018
+estim stor m7
+esttab m1 m2 m3 m4 m5 m6 m7 using taiwan1.rtf, replace se stat(N r2 r2_a)
+
+*separate regressions 
+
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2001
+estim stor m1
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2006
+estim stor m2
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2010
+estim stor m3
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2014
+estim stor m4
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education if SurveyYear==2018
+estim stor m5
+esttab m1 m2 m3 m4 m5 using philippines.sep.rtf, replace se stat(N r2 r2_a)
+
+*main
+
+reg poltrust_new MilitaryRule
+estim stor m1
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education
+estim stor m2
+reg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear
+estim stor m3
+xtreg poltrust_new MilitaryRule PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Education i.SurveyYear , fe
+estim stor m4
+esttab m1 m2 m3 m4 using philippines.main.mods.rtf, replace se stat(N r2 r2_a)
+
+
+
+*jan 14 regression
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" 
+tab Safety
+drop _est_m2 _est_m4 _est_m5 _est_m6 _est_m1 _est_random _est_fixed _est_m3
+drop _est_randint _est_randslope
+tab StrongLeader
+tab ExpertsRule
+gen author_values = ( StrongLeader + ExpertsRule + MilitaryRule + ReligiousRule)/4
+tab author_values
+sum author_values, detail
+recode author_values 1/2.5 = 0 2.5/4 = 1, gen(author_values_re)
+tab author_values_re
+tab Safety
+sum Safety, detail
+tab Secured
+sum Secured, detail
+tab Secured_re
+sum Secured, detail
+tab Safety
+sum Safety, detail
+recode Safety 1/2 = 0 2/4 = 1, gen(Safety_re)
+tab Safety_re
+gen secured_authoritarians_new = ( Safety_re==1 ) & ( author_values_re==1 )
+tab secured_authoritarians_new
+gen insecured_authoritarians_new = ( Safety_re==0 ) & ( author_values_re==1 )
+gen secured_democrats_new = ( Safety_re==1 ) & ( author_values_re==0 )
+gen insecured_democrats_new = ( Safety_re==0 ) & ( author_values_re==0 )
+tab insecured_democrats_new
+tab secured_democrats_new
+reg poltrust_new secured_democrats_new
+reg poltrust_new insecured_democrats_new
+reg poltrust_new secured_authoritarians_new
+reg poltrust_new insecured_authoritarians_new
+reg poltrust_new secured_democrats_new
+estim stor m1
+reg poltrust_new insecured_democrats_new
+estim stor m2
+reg poltrust_new insecured_authoritarians_new
+estim stor m3
+reg poltrust_new secured_authoritarians_new
+estim stor m4
+esttab m1 m2 m3 m4 using mop.rtf, replace se
+esttab m1 m2 m3 m4 using mop.rtf, replace se stat(N r2 r2_a)
+reg poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud
+esttab, replace se stat(N r2 r2_a)
+reg poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud i.B_COUNTRY
+esttab, replace se stat(N r2 r2_a)
+mixed poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud || LibDemo:
+esttab, replace se stat(N r2 r2_a)
+save "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" , replace
+
+
+
+**
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" 
+tab militaryexp
+tab secured_authoritarians_new
+reg poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud
+esttab, replace se stat(N r2 r2_a)
+reg poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud i.B_COUNTRY
+esttab, replace se stat(N r2 r2_a)
+mixed poltrust_new secured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud || LibDemo:
+esttab, replace se stat(N r2 r2_a)
+reg poltrust_new trustarmy
+mixed poltrust_new secured_authoritarians_new trustarmy trustpolice socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud || LibDemo:
+reg poltrust_new insecured_democrats_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud
+reg poltrust_new secured_democrats_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud
+reg poltrust_new insecured_authoritarians_new socialtrust demperception polinterst age income education religiosity gender household_sat parents_proud
+gen trust_protective = ( trustarmy + trustpolice )/2
+gen trust_political = ( trustgov + trustcivservices )/2
+drop trust_political
+tab Q76
+tab Q74
+tab Q112
+gen perceived_corruption = Q112
+tab perceived_corruption
+drop if perceived_corruption<1
+tab Q76
+gen Trust_Election = 5- Q76
+tab Trust_Election
+drop if Trust_Election>4
+gen trust_civil_ins = ( Trust_Election + trustcivservices )/2
+gen trust_political_ins = ( trustcourts + trustgov + trustcongress + trustparties )/4
+reg trust_protective insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m1
+reg trust_political_ins insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m2
+reg trust_civil_ins insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m3
+reg trust_protective secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m4
+reg trust_political_ins secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m5
+reg trust_civil_ins secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using jan15.rtf, replace se stat(N aic bic r2 r2_a)
+mixed trust_protective insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m1
+mixed trust_political_ins insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m2
+mixed trust_civil_ins insecured_democrats_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m3
+mixed trust_protective secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m4
+mixed trust_protective secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+mixed trust_political_ins secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m5
+mixed trust_civil_ins secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using jan15a.rtf, replace se stat(N aic bic r2 r2_a)
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" 
+xtmixed poltrust_new secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+estim stor m1
+xtmixed poltrust_new secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || N_REGION_WVS :
+estim stor m2
+esttab m1 m2 using m334.rtf, replace se stat(N aic bic r2 r2_a)
+xtmixed poltrust_new secured_authoritarians_new || N_REGION_WVS : || LibDemo:
+estim stor m3
+esttab m1 m2 m3 using m3rere.rtf, replace se stat(N aic bic r2 r2_a)
+xtmixed poltrust_new secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || N_REGION_WVS : || LibDemo:
+
+*jan 16
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" 
+tab Secured
+tab Safety
+sum Safety, detail
+tab Safety_re
+tab Secured_re
+tab Secured
+sum Secured , detail
+recode Secured 1/2 = 0 3/4 = 1, recode (Secured_RE)
+recode Secured 1/2 = 0 3/4 = 1, gen (Secured_RE)
+tab Secured_RE
+tab Secured_re
+drop Secured_re
+tab author_values_re
+gen Psych_safety = ( Safety_re==1 ) & ( Secured_RE==1 )
+tab Psych_safety
+gen SECURED_author_cit = ( Psych_safety == 1) & ( author_values_re==1 )
+tab SECURED_author_cit
+reg SECURED_author_cit poltrust_new secured_authoritarians_new household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+esttab
+esttab, replace se
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+esttab, replace se
+esttab, replace se stat(N r2)
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo:
+esttab, replace se stat(N r2)
+esttab, replace se stat(N r2) chibar(4_5)
+esttab, replace se stat(N r2)
+estat icc
+estat ic
+reg poltrust_new SECURED_author_cit
+xtset B_COUNTRY
+xtreg poltrust_new SECURED_author_cit
+estim stor m1
+xtreg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+estim stor m2
+xtreg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender, fe
+estim stor m3
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || N_REGION_WVS, cov(identity)
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || N_REGION_WVS:, cov(unstruct) , vce(robust)
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo :, cov(unstruct) , vce(robust)
+estim stor m4
+esttab m1 m2 m3 m4 using wvs1.rtf, replace se stat(N aic bic r2 r2_a)
+reg poltrust_new SECURED_author_cit
+estim stor m1
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+estim stor m2
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m3
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo :, cov(unstruct) , vce(robust)
+estim stor m4
+esttab m1 m2 m3 m4 using wvs2.rtf, replace se stat(N aic bic r2 r2_a)
+
+*stata do file
+graph bar trustarmy trustpolice trustcourts Trust_Election trustcivservices trustgov trustcongress trustparties poltrust_new , ylabel(1(1)4) yline(2.29, lpattern(dash) lwidth(midthick))
+
+graph bar trustarmy trustpolice trustcourts Trust_Election trustcivservices trustgov trustcongress trustparties poltrust_new , ylabel(1(1)4) yline(2.29, lpattern(dash) lwidth(medthick)) ytitle("Levels of Trust (mean)")
+
+
+
+graph hbar SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit , over( poltrust_new, sort(order) descending ) stack percent
+
+graph hbar SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit , over( poltrust_new, sort(order) descending ) stack percent  ytitle ("Typology of citizens over Political Trust (mean)")
+
+graph hbar SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit , over( poltrust_new, sort(order) descending ) stack percent  ytitle ("Typology of citizens over Political Trust (mean)")
+
+
+
+reg poltrust_new SECURED_author_cit
+estim stor m1
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+estim stor m2
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m3
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.N_REGION_WVS
+estim stor m4
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo :, cov(unstruct) , vce(robust)
+estim stor m5
+
+di exp([lns1_1_1]_b[_cons])
+di exp([lnsig_e]_b[_cons])
+
+
+*only autocraices
+
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender ||LibDemo :, cov(unstruct) , vce(robust) if Liberal_countries_re ==0
+estim stor m1
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender ||LibDemo :, cov(unstruct) , vce(robust) if Liberal_countries_re ==1
+estim stor m2
+
+-do this in R
+
+sum LibDemo, detail
+recode LibDemo .0/.486 = 0 .486/1.0 = 1, gen(Liberal_countries_re)
+tab Liberal_countries_re
+xtmixed poltrust_new SECURED_author_cit || Liberal_countries_re :
+xtmixed poltrust_new SECURED_author_cit || if Liberal_countries_re==0 :
+tab Liberal_countries_re
+gen illiberal = if Liberal_countries_re<0
+gen illiberal == Liberal_countries_re<0
+gen illiberal = Liberal_countries_re<0
+tab illiberal
+drop illiberal
+gen illiberal = Liberal_countries_re == 0
+tab illiberal
+gen liberal = Liberal_countries_re == 1
+tab liberal
+
+*replication jan17
+
+sum trust_army, detail
+graph hbar trust_army, over( S020) ytitle("Trust in the army") scheme(s2mono) ylabel(1(1)4) name(graph1, replace) yline(2.79)
+
+sum trust_police , detail
+sum trust_police , detail
+graph hbar trust_police , over( S020) ytitle("Trust in the police") scheme(s2mono) ylabel(1(1)4) name(graph2, replace) yline(2.57)
+
+sum trust_police , detail
+graph hbar trust_police , over( S020) ytitle("Trust in the police") scheme(s2mono) ylabel(1(1)4) name(graph2, replace) yline(2.57)
+sum trust_congress , detail
+graph hbar trust_congress , over( S020) ytitle("Trust in congress") scheme(s2mono) ylabel(1(1)4) name(graph3, replace) yline(2.26)
+sum trust_civ_services , detail
+graph hbar trust_civ_services , over( S020) ytitle("Trust in civil services") scheme(s2mono) ylabel(1(1)4) name(graph4, replace) yline(2.41)
+sum trust_gov , detail
+graph hbar trust_gov , over( S020) ytitle("Trust in the government") scheme(s2mono) ylabel(1(1)4) name(graph5, replace) yline(2.39)
+sum trust_parties , detail
+graph hbar trust_parties , over( S020) ytitle("Trust in political parties") scheme(s2mono) ylabel(1(1)4) name(graph6, replace) yline(2.07)
+sum trust_courts , detail
+graph hbar trust_courts , over( S020) ytitle("Trust in courts") scheme(s2mono) ylabel(1(1)4) name(graph7, replace) yline(2.53)
+
+
+graph hbar trust_army, over( S020) ytitle("Trust in the army") scheme(s2mono) ylabel(1(1)4) name(graph1, replace) yline(2.79, lpattern(dash) lwidth(medthick))
+graph hbar trust_police , over( S020) ytitle("Trust in the police") scheme(s2mono) ylabel(1(1)4) name(graph2, replace) yline(2.57, lpattern(dash) lwidth(medthick))
+graph hbar trust_congress , over( S020) ytitle("Trust in congress") scheme(s2mono) ylabel(1(1)4) name(graph3, replace) yline(2.26, lpattern(dash) lwidth(medthick))
+graph hbar trust_civ_services , over( S020) ytitle("Trust in civil services") scheme(s2mono) ylabel(1(1)4) name(graph4, replace) yline(2.41, lpattern(dash) lwidth(medthick))
+graph hbar trust_gov , over( S020) ytitle("Trust in the government") scheme(s2mono) ylabel(1(1)4) name(graph5, replace) yline(2.39, lpattern(dash) lwidth(medthick))
+graph hbar trust_parties , over( S020) ytitle("Trust in political parties") scheme(s2mono) ylabel(1(1)4) name(graph6, replace) yline(2.07, lpattern(dash) lwidth(medthick))
+graph hbar trust_courts , over( S020) ytitle("Trust in courts") scheme(s2mono) ylabel(1(1)4) name(graph7, replace) yline(2.53, lpattern(dash) lwidth(medthick))
+graph combine graph1 graph2 graph3 graph4 graph5 graph6 graph7, ysize(10) note("Source: World Values Survey (WVS)")
+graph save "Graph" "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\Figure 1_All WVS merge_Jan18.gph"
+graph export "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\Figure 1_All WVS merge_Jan18.png", as(png) name("Graph")
+graph combine graph1 graph2 graph3 graph4 graph5 graph6 graph7, ysize(10)
+graph save "Graph" "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\Figure 1_All WVS merge_Jan18.gph", replace
+graph export "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\Figure 1_All WVS merge_Jan18.png", as(png) name("Graph") replace
+
+
+
+graph hbar SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit , over( B_COUNTRY , sort(order) descending ) stack percent scheme(s2mono)
+
+
+graph hbar trustarmy trustpolice trustcourts trustgov trustparties trustcongress trustcivservices Trust_Election , over( B_COUNTRY , sort(order) descending ) stack percent
+
+
+
+
+*regression with sir article
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Replication_Codes\Regression results\Jan12 results\WVS_Wave7_Jan13.dta" 
+reg poltrust_new SECURED_author_cit
+estim stor m1
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+estim stor m2
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY
+estim stor m3
+reg poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.N_REGION_WVS
+estim stor m4
+mixed poltrust_new SECURED_author_cit household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender || LibDemo :, cov(unstruct) , vce(robust)
+estim stor m5
+tab Q55
+tab Q52
+tab Safety
+tab Q131
+tab Secured
+tab Psych_safety
+tab Secured_RE
+tab MilitaryRule
+tab ReligiousRule
+tab SECURED_author_cit
+tab Q253
+gen respect_HR = 5- Q253
+reg respect_HR SECURED_author_cit
+esttab
+sum respect_HR, detail
+gen respect_HR2 = respect_HR>=3
+logit respect_HR2 SECURED_author_cit
+esttab
+esttab, replace se
+logit respect_HR2 SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit
+esttab
+logit respect_HR2 SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit i.B_COUNTRY
+esttab
+logit respect_HR2 SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit i.B_COUNTRY household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+logit respect_HR2 SECURED_author_cit SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit i.B_COUNTRY household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender, robust
+logit respect_HR2 Psych_safety SECURED_DEMO_cit INSECURED_author_cit INSECURED_DEMO_cit i.B_COUNTRY household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender, robust
+logit respect_HR2 Psych_safety i.B_COUNTRY household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender, robust
+logit respect_HR2 Psych_safety household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender i.B_COUNTRY , robust
+logit respect_HR2 c.Psych_safety##c.author_values household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+esttab
+summ Psych_safety author_values
+summ Psych_safety author_values_re
+logit respect_HR2 c.Psych_safety##i.author_values household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+tab author_values_re
+logit respect_HR2 c.Psych_safety##c.author_values_re household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+logistic respect_HR2 c.Psych_safety##c.author_values_re household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+logit respect_HR2 c.Psych_safety##c.author_values_re household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+lincom Psych_safety + author_values_re + c.Psych_safety#c.author_values_re
+gen psych_aut = Psych_safety* author_values_re
+tab psych_aut
+logit respect_HR2 psych_aut household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+tab psych_aut
+tab Q189
+tab W_WEIGHT
+svyset _n [ weight= W_WEIGHT ]
+svy: logit respect_HR2 psych_aut household_sat parents_proud perceived_corruption socialtrust demperception polinterst age income education religiosity gender
+tab Q238
+tab Q233
+tab Q233
+tab Q233, nolab
+gen women = Q233
+replace women = . if women <0
+tab women
+
+*before reverse code, render it as missing muna, then label (formula)
+
+
+#replication Feb 3 2022
+use "C:\Users\User\Desktop\R projects\World Values Survey_Project\WVS_Cross-National_Wave_7_stata_v2_0.dta" 
+tab W_WEIGHT
+tab Q199
+sum  Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+freq  Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+pca Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+alpha Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+cor Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+gen child_goodmnrs = 3- Q7
+tab child_goodmnrs
+replace child_goodmnrs = . if child_goodmnrs>3
+tab child_goodmnrs
+gen child_indpdnce = 3- Q8
+gen child_hrdwrk = 3- Q9
+gen child_rspnsblty = 3- Q10
+gen child_imgntn = 3- Q11
+gen child_tolerance = 3- Q12
+gen child_thrifty = 3- Q13
+gen child_dtrmntn = 3- Q14
+gen child_relfaith = 3- Q15
+gen child_unselfshns = 3- Q16
+gen child_obedience = 3- Q17
+replace child_indpdnce = . if child_indpdnce > 3
+replace child_hrdwrk = . if child_hrdwrk>3
+replace child_rspnsblty= . if child_rspnsblty>3
+replace child_imgntn = . if child_imgntn>3
+replace child_tolerance = . if child_tolerance>3
+replace child_thrifty = . if child_thrifty>3
+replace child_dtrmntn= . if child_dtrmntn>3
+replace child_relfaith = . if child_relfaith>3
+replace child_unselfshns = . if child_unselfshns>3
+replace child_obedience = . if child_obedience>3
+sum child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_imgntn child_tolerance child_thrifty child_dtrmntn child_relfaith child_unselfshns child_obedience
+pca child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_imgntn child_tolerance child_thrifty child_dtrmntn child_relfaith child_unselfshns child_obedience
+alpha child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_imgntn child_tolerance child_thrifty child_dtrmntn child_relfaith child_unselfshns child_obedience
+alpha Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17
+alpha child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_tolerance
+tab child_hrdwrk
+alpha child_goodmnrs child_hrdwrk child_obedience child_unselfshns
+gen authoritarianism = (child_goodmnrs + child_indpdnce + child_hrdwrk + child_rspnsblty + child_imgntn + child_tolerance + child_thrifty + child_dtrmntn + child_relfaith + child_unselfshns + child_obedience)/11
+tab authoritarianism
+sum authoritarianism, detail
+recode authoritarianism 1/1.454545 = 0 1.454545/2 = 1, gen(authoritarianism_RE)
+tab authoritarianism_RE
+tab child_goodmnrs
+tab Q65
+gen trust_army = 5- Q65
+tab trust_army
+gen trust_police = 5- Q69
+gen trust_courts = 5- Q70
+gen trust_govt = 5- Q71
+gen trust_polparties = 5- Q72
+gen trust_congress = 5- Q73
+gen trust_civservices = 5- Q74
+gen trust_elections = 5- Q76
+tab trust_army
+replace trust_army = . if trust_army>5
+replace trust_police = . if trust_police>5
+replace trust_courts = . if trust_courts>5
+replace trust_govt = . if trust_govt>5
+replace trust_polparties = . if trust_polparties>5
+replace trust_congress = . if trust_congress>5
+replace trust_civservices = . if trust_civservices>5
+replace trust_elections = . if trust_elections>5
+pca trust_army trust_police trust_courts trust_govt trust_polparties trust_congress trust_civservices trust_elections
+alpha trust_army trust_police trust_courts trust_govt trust_polparties trust_congress trust_civservices trust_elections
+gen poltrust = ( trust_army + trust_police + trust_courts + trust_govt + trust_polparties + trust_congress + trust_civservices + trust_elections)/8
+tab poltrust
+tab authoritarianism
+tab poltrust
+sum poltrust, detail
+recode poltrust 1/ 2.5 = 0  2.5/4 = 1, gen (poltrust_RE)
+logit poltrust_RE authoritarianism_RE
+reg poltrust authoritarianism_RE
+reg poltrust child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_imgntn child_tolerance child_thrifty child_dtrmntn child_relfaith child_unselfshns child_obedience
+esttab
+esttab, replace se
+logit poltrust_RE child_goodmnrs child_indpdnce child_hrdwrk child_rspnsblty child_imgntn child_tolerance child_thrifty child_dtrmntn child_relfaith child_unselfshns child_obedience
+esttab, replace se
+logit poltrust_RE authoritarianism_RE
+esttab, replace se
+logit poltrust_RE authoritarianism_RE i.B_COUNTRY
+esttab, replace se
+tab Q150
+gen freedm_vs_scrty = 3- Q150
+tab freedm_vs_scrty
+tab Q131
+tab freedm_vs_scrty
+replace freedm_vs_scrty = . if freedm_vs_scrty>3
+tab Q131
+gen security_neighbrhd = 5- Q131
+tab security_neighbrhd
+replace security_neighbrhd = . if security_neighbrhd>5
+tab security_neighbrhd
+tab Q52
+gen safety_homes = 5- Q52
+tab safety_homes
+drop safety_homes
+gen safety_homes = Q52
+tab safety_homes
+replace safety_homes=. if safety_homes<1
+tab safety_homes
+tab Q112
+gen perceived_corptn = Q112
+tab perceived_corptn
+replace perceived_corptn = . if perceived_corptn<1
+tab Q59
+gen socialtrust = 5- Q59
+tab socialtrust
+replace socialtrust = . if socialtrust>5
+tab Q262
+tab x003R
+tab X003R2
+tab Q253
+gen respect_hr = 5- Q253
+tab respect_hr
+replace respect_hr = . if respect_hr>5
+tab Q50
+gen satis_household_finance = Q50
+tab Q49
+gen satis_life = Q49
+tab Q252
+gen satis_systemprfmnc = Q252
+replace satis_household_finance = . if satis_household_finance<1
+replace satis_life = . if satis_life<1
+replace satis_systemprfmnc = . if satis_systemprfmnc<1
+tab Q199
+gen interest_politics = 5- Q199
+tab interest_politics
+replace interest_politics = . if interest_politics>5
+tab Q240
+gen left_right_ideol = Q240
+tab left_right_ideol
+replace left_right_ideol == . if left_right_ideol<1
+replace left_right_ideol= . if left_right_ideol<1
+tab left_right_ideol
+tab interest_politics
+tab Q148
+tab Q148
+tab Q147
+tab Q146
+gen worry_warVSothr = 5- Q146
+tab worry_warVSothr
+gen worry_terror_attack = 5- Q147
+gen worry_civilwar = 5- Q148
+tab worry_terror_attack
+tab worry_civilwar
+replace worry_warVSothr = . if worry_warVSothr>5
+replace worry_terror_attack = . if worry_terror_attack>5
+replace worry_civilwar = . if worry_civilwar>5
+reg poltrust authoritarianism_RE
+estim stor m1
+reg poltrust authoritarianism_RE freedm_vs_scrty security_neighbrhd safety_homes
+esttab
+tab freedm_vs_scrty
+recode freedm_vs_scrty 1=1 2=0, gen(freedm_vs_scrty_RE)
+tab freedm_vs_scrty_RE
+reg poltrust authoritarianism_RE freedm_vs_scrty_RE security_neighbrhd safety_homes
+esttab
+gen age = Q262
+tab Q260
+tab worry_civilwar
+tab age
+replace age = . if age<1
+tab Q260
+gen gender = Q260
+tab gender
+replace gender = . if gender<1
+tab Q275R
+tab Q275
+tab Q275R
+gen education = Q275
+gen educationR = Q275R
+tab education
+tab educationR
+replace educationR = . if educationR<0
+replace education = . if education<0
+tab education
+tab educationR
+tab Q172
+gen pray = 9- Q172
+tab pray
+replace pray = . if pray>9
+drop _est_m1
+reg poltrust authoritarianism_RE security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+esttab, replace se
+reg authoritarianism_RE poltrust security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+reg poltrust authoritarianism_RE security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+reg poltrust c.authoritarianism_RE##c.worry_warVSothr security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+esttab, replace se
+reg poltrust authoritarianism_RE worry_warVSothr security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+estim stor m1
+reg poltrust c.authoritarianism_RE##c.worry_warVSothr security_neighbrhd satis_household_finance satis_life satis_systemprfmnc interest_politics left_right_ideol perceived_corptn socialtrust age gender education pray
+estim stor m2
+esttab m1 m2 using m2.rtf, replace se stat(N r2)
+
+
+#feb 5 2022 marginsplot
+
+#proximal threat
+mixed poltrust c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity)
+
+margins, dydx(insecure) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust") nolabels recast(line) recastci(rline) yline(0) 
+
+
+
+#autocracies
+
+mixed poltrust c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity), if LibDem<.5
+
+margins, dydx(insecure) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust in autocracies") nolabels recast(line) recastci(rline) yline(0) 
+
+
+
+#democracies
+
+mixed poltrust c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity), if LibDem>.5
+
+margins, dydx(insecure) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust in democracies") nolabels recast(line) recastci(rline)
+
+
+
+#distal threat
+
+mixed poltrust c.worry_warVSothr##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity)
+
+margins, dydx(worry_warVSoth) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership") ytitle("effects of distal threat on political trust") nolabels recast(line) recastci(rline) yline(0) 
+
+
+#autocracies
+
+mixed poltrust c.worry_warVSothr##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity), if LibDem<.5
+
+margins, dydx(worry_warVSothr) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of distal threat on political trust in autocracies") nolabels recast(line) recastci(rline) yline(0) 
+
+
+#democracies
+
+mixed poltrust c.worry_warVSothr##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity), if LibDem>.5
+
+margins, dydx(worry_warVSothr) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of distal threat on political trust in democracies") nolabels recast(line) recastci(rline)  
+
+
+#feb 6 2022
+
+mixed poltrust_no_prot c.worry_warVSothr##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray || LibDem:, cov(identity)
+margins, dydx(worry_warVSothr) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust") nolabels recast(line) recastci(rline) yline(0) 
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of distal threat on political trust") nolabels recast(line) recastci(rline) yline(0)
+graph save "Graph" "C:\Users\User\Desktop\R projects\World Values Survey_Project\Feb 5 2022 plots\poltrust_no_prot\distal threat_feb 6.gph"
+graph export "C:\Users\User\Desktop\R projects\World Values Survey_Project\Feb 5 2022 plots\poltrust_no_prot\distal threat_feb 6.png", as(png) name("Graph")
+
+
+#feb 7 
+
+reg poltrust_no_prot c.worry_terror_attack##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray i.B_COUNTRY 
+margins, dydx(worry_terror_attack) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust") nolabels recast(line) recastci(rline) yline(0) 
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of distal threat on political trust") nolabels recast(line) recastci(rline) yline(0)
+
+
+reg poltrust_no_prot c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray i.B_COUNTRY
+margins, dydx(insecure) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust") nolabels recast(line) recastci(rline) yline(0)
+
+graph twoway (lfit poltrust_no_pro insecure)
+(scatter (lfit poltrust_no_pro insecure, jitter(7)), name()
+
+
+
+#specs feb 10
+
+use "C:\Users\User\Desktop\R projects\World Values Survey_Project\WVS_Cross-National_Wave_7_stata_Pernia_030222.dta" 
+sum Q201 Q202 Q203 Q204 Q205 Q206 Q207 Q208
+tab Q201
+tab Q202
+tab Q203
+tab Q204
+tab Q205
+tab Q206
+tab Q207
+tab Q208
+gen info_newspaper = 5- Q201
+tab info_newspaper
+drop info_newspaper
+gen info_newspaper = 6- Q201
+tab info_newspaper
+replace info_newspaper = . if info_newspaper>5
+gen info_TV = 6-Q202
+tab info_TV
+tab info_newspaper
+tab Q201
+tab info_TV
+replace info_TV = . if info_TV>5
+gen info_radio = 6-Q203
+replace info_radio = . if info_radio>5
+gen info_phone = 6-Q204
+replace info_phone = . if info_phone>5
+gen info_email = 6- Q205
+replace info_email = . if info_email>5
+tab Q205
+gen info_internet = 6- Q206
+replace info_internet = . if info_internet>5
+tab Q206
+gen info_socmedia = 6- Q207
+replace info_socmedia = . if info_socmedia>5
+tab Q207
+gen info_talk_peers = 6- Q208
+replace info_talk_peers = . if info_talk_peers>5
+reg poltrust_no_prot insecure info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+reg poltrust_no_prot c.insecure##c.info_TV info_newspaper info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+reg poltrust_no_prot insecure info_TV info_newspaper info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+reg poltrust_no_prot insecure info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+estim stor m1
+reg poltrust_no_prot worry_terror_attack info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+estim stor m2
+reg poltrust_no_prot c.insecure##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+estim stor m3
+reg poltrust_no_prot c.worry_terror_attack##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers
+estim stor m4
+reg poltrust_no_prot c.insecure##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers perceived_corptn socialtrust satis_household_finance satis_systemprfmnc interest_politics left_right_ideol age gender education pray social_class
+estim stor m5
+reg poltrust_no_prot c.worry_terror_attack##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers perceived_corptn socialtrust satis_household_finance satis_systemprfmnc interest_politics left_right_ideol age gender education pray social_class
+estim stor m6
+reg poltrust_no_prot c.worry_terror_attack##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers perceived_corptn socialtrust satis_household_finance satis_systemprfmnc interest_politics left_right_ideol age gender education pray social_class i.B_COUNTRY
+estim stor m7
+reg poltrust_no_prot c.insecure##c.strong_leader info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers perceived_corptn socialtrust satis_household_finance satis_systemprfmnc interest_politics left_right_ideol age gender education pray social_class i.B_COUNTRY
+estim stor m8
+
+
+#reg feb 12
+
+reg poltrust_no_prot c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray info_newspaper info_TV info_radio info_phone info_email info_internet info_socmedia info_talk_peers i.B_COUNTRY
+
+
+
+#reg feb 22
+
+use "C:\Users\User\Desktop\R projects\World Values Survey_Project\WVS_Cross-National_Wave_7_stata_Pernia_030222.dta" 
+reg poltrust_no_prot c.worry_terror_attack##c.strong_leader c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray
+mixed poltrust_no_prot c.worry_terror_attack##c.strong_leader c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray | LibDem:, cov(identity),  
+mixed poltrust_no_prot c.worry_terror_attack##c.strong_leader c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray | LibDem:, cov(identity)
+mixed poltrust_no_prot c.worry_terror_attack##c.strong_leader c.insecure##c.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray
+mixed poltrust_no_prot worry_terror_attack i.insecure##i.strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray
+reg poltrust_no_prot insecure worry_terror_attack strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray c.insecure#c.strong_leader c.worry_terror_attack#c.strong_leader
+mixed poltrust_no_prot insecure worry_terror_attack strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray c.insecure#c.strong_leader c.worry_terror_attack#c.strong_leader || LibDem: , cov(unstruct)
+margins, dydx( insecure ) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of proximal threat on political trust") nolabels recast(line) recastci(rline) yline(0) 
+graph save "Graph" "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Dissertation_updates_2022\Feb 14 2022\after meeting with Prof titus_Feb 21\Figure 1_Proximal threat_Feb 22.gph"
+margins, dydx( worry_terror_attack ) at (strong_leader=(1 (0.1) 4)) vsquish
+marginsplot, x(strong_leader)
+marginsplot, plot1opts(lp(solid) lc(gs1)) ci1opts(lp(dash) lc(gs6)) graphregion(color(white)) title("") subtitle("") xtitle("support for strong leadership")  ytitle("effects of distal threat on political trust") nolabels recast(line) recastci(rline) yline(0)
+mixed poltrust_no_prot insecure worry_terror_attack strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray c.insecure#c.strong_leader c.worry_terror_attack#c.strong_leader || LibDem: , || hdi :, cov(unstruct)
+mixed poltrust_no_prot insecure worry_terror_attack strong_leader satis_household_finance satis_systemprfmnc interest_politics socialtrust dem_perception age gender social_class educationR pray c.insecure#c.strong_leader c.worry_terror_attack#c.strong_leader || LibDem: , || hdi :, || btigoveperform:,  cov(unstruct)
+

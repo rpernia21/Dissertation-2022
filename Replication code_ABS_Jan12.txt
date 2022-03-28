@@ -1,0 +1,286 @@
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Merge_final_Taiwan_Jan11_2022version.dta" 
+tab author__values
+tab RegimeSatisfaction
+tab DemSatisfaction
+tab ExpertsRule
+tab demsupport
+tab author__values
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+xtset SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+logistic PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+tab SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m1.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m2.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m4 m5 m6 using m3.rtf, replace se stat(N aic bic)
+tab MilitaryRule
+tab OnePartyRule
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule
+alpha ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule
+alpha ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule OnePartyRule StrongLeaders
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule OnePartyRule StrongLeaders
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 StrongLeaders
+pca TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+efa TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+fa TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+xtlogit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+logistic PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+xtlogit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+esttab, replace se
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m4.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m5.rtf, replace se stat(N aic bic)
+xtset SurveyYear
+xtreg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m6.rtf, replace se stat(N aic bic r2 ar2)
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m7.rtf, replace se stat(N aic bic r2 ar2)
+
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Merge_final_Taiwan_Jan11_2022version.dta" 
+tab author__values
+tab RegimeSatisfaction
+tab DemSatisfaction
+tab ExpertsRule
+tab demsupport
+tab author__values
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+xtset SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+logistic PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+tab SurveyYear
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m1.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE AuthoritarianValues PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m2.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE author__values PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m4 m5 m6 using m3.rtf, replace se stat(N aic bic)
+tab MilitaryRule
+tab OnePartyRule
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule
+alpha ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule
+alpha ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule OnePartyRule StrongLeaders
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 MilitaryRule OnePartyRule StrongLeaders
+pca ConformitytoLeaders Submission AntiPolPluralism1 AntiPolPluralism2 StrongLeaders
+pca TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+efa TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+fa TrustCourts TrustNatGov TrustParties TrustCongress TrustCivService TrustMilitary TrustPolice
+xtlogit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+logistic PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+xtlogit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+esttab, replace se
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE StrongLeaders PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m4.rtf, replace se stat(N aic bic)
+xtlogit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+logit PolTrustRE MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m5.rtf, replace se stat(N aic bic)
+xtset SurveyYear
+xtreg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m6.rtf, replace se stat(N aic bic r2 ar2)
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m7.rtf, replace se stat(N aic bic r2 ar2)
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+esttab, replace se
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+esttab, replace se
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+esttab, replace se
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+esttab, replace se
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+esttab, replace se
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+esttab, replace se
+esttab, replace se stat(n r2)
+
+*Philippines
+
+use "C:\Users\User\Desktop\R projects\Asian Barometer Survey_Project\Asian Barometer\Authoritarian Values and Political Trust\Dissertation 2021\Merge_final_Philippines_Jan11_2021version.dta" 
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity i.SurveyYear
+estim stor m1
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2001
+estim stor m2
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2006
+estim stor m3
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2010
+estim stor m4
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2014
+estim stor m5
+reg PolTrust MilitaryRule PresentFamEcon FollowParents PolInterest SocialTrust DemSatisfaction Age Gender IncomeGroup Urbanization Education Religiosity if SurveyYear==2018
+estim stor m6
+esttab m1 m2 m3 m4 m5 m6 using m6.rtf, replace se stat(N aic bic)
+esttab m1 m2 m3 m4 m5 m6 using mod1.rtf, replace se stat(N aic bic r2)
