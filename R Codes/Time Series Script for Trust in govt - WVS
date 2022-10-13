@@ -1,0 +1,221 @@
+#Plotting Time series
+
+rm(list=ls())
+
+library(tidyverse)
+library(haven)
+library(ggplot2)
+
+load("~/Pernia 2022_WVS Projects/WVS_TimeSeries_1981_2022_Rdata_v3_0.rdata")
+
+WVS.TS <-WVS_TimeSeries_1981_2022_spss_v3_0
+
+
+library(ggplot2)
+library(tidyverse)
+
+WVS.TS  %>%
+  ggplot(aes(x = btiruleoflaw, y =  btigovindex))+
+  geom_point()+geom_text(aes(label=C_COW_ALPHA, check_overlap = TRUE), 
+                         nudge_C_COW_ALPHA=-0.1, hjust=0, vjust=0)+
+  xlab("BTI Rule of Law Index") + ylab("BTI Governance Index")+
+  geom_vline(xintercept = 5.0, linetype="dashed", lwd=1,
+             color = "blue")+
+  geom_hline(yintercept = 5.0, linetype="dashed", lwd=1,
+             color="blue") + theme_bw() 
+
+geom_smooth(method = lm)
+
+
+
+#trust in government
+
+library(car)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+
+WVS.TS$E069_11
+WVS.TS$trustgov <-WVS.TS$E069_11
+table(WVS.TS$trustgov)
+
+
+WVS.TS$trustgovR <-car::recode(WVS.TS$trustgov,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustgovR)
+WVS.TS$trustgovR[WVS.TS$trustgovR<1] <-NA
+table(WVS.TS$trustgovR)
+summary(WVS.TS$trustgovR)
+
+names(WVS.TS)
+
+WVS.TS$perwaves <-WVS.TS$S002VS
+
+WVS.TS$perwaves <-as.character(WVS.TS$perwaves)
+
+WVS.TS$perwaves[WVS.TS$perwaves == 2] <-"Wave 2: 1989-1993"
+WVS.TS$perwaves[WVS.TS$perwaves == 3] <-"Wave 3: 1994-1998"
+WVS.TS$perwaves[WVS.TS$perwaves == 4] <-"Wave 4: 1999-2004"
+WVS.TS$perwaves[WVS.TS$perwaves == 5] <-"Wave 5: 2005-2009"
+WVS.TS$perwaves[WVS.TS$perwaves == 6] <-"Wave 6: 2010- 2014"
+WVS.TS$perwaves[WVS.TS$perwaves == 7] <-"Wave 7: 2017-2022"
+
+
+WVS.TS %>% drop_na(trustgovR) %>% 
+  ggplot(aes(x=trustgovR))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Government")+
+  geom_bar(position = 'stack')+facet_wrap(~perwaves) + theme_bw() +
+  geom_vline(xintercept = 3, linetype="solid", 
+             color = "blue")
+
+#(labels = scales::percent_format(accuracy = 1))
+
+#scale_y_continuous(labels = scales::percent)
+
+WVS.TS %>% drop_na(trustcongR) %>% 
+  ggplot(aes(x=trustcongR))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Congress")+
+  geom_bar(position = 'stack')+facet_wrap(~perwaves) + theme_bw() +
+  geom_vline(xintercept = 3, linetype="solid", 
+             color = "blue")
+
+
+
+dat3 <-WVS %>% 
+  ggplot(aes(x = poltrust_no_prot ,color=))+
+  geom_bar(position = 'stack')+
+  geom_vline(xintercept = 3, linetype="solid", 
+             color = "blue")+
+  facet_wrap(~B_COUNTRY_ALPHA) + 
+  labs (x = 'Political Trust',
+        caption = 'Source: Wave 7 World Values Survey (WVS 7)') +
+  theme_bw() 
+
+WVS.TS$trustgovR<-as.character(WVS.TS$trustgovR)
+
+WVS.TS$trustgovR[WVS.TS$trustgovR == '1'] <-"1. Not at all"
+WVS.TS$trustgovR[WVS.TS$trustgovR == '2'] <-"2. Not much"
+WVS.TS$trustgovR[WVS.TS$trustgovR == '3'] <-"3. A great deal"
+WVS.TS$trustgovR[WVS.TS$trustgovR == '4'] <-"4. Very much"
+
+
+ggsave("ts-trustgov2.png",
+       width=11.7, height=8.3, units="in", dpi=100)
+
+
+
+#trust in congress
+
+WVS.TS$E069_07
+WVS.TS$trustcong <-WVS.TS$E069_07
+table(WVS.TS$trustcong)
+
+library(car)
+WVS.TS$trustcongR <-car::recode(WVS.TS$trustcong,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustcongR)
+WVS.TS$trustcongR[WVS.TS$trustcongR<1] <-NA
+table(WVS.TS$trustcongR)
+summary(WVS.TS$trustcongR)
+
+#trust in armed forces####
+
+WVS.TS$E069_02
+WVS.TS$trustarmed <-WVS.TS$E069_02
+table(WVS.TS$trustarmed )
+
+library(car)
+WVS.TS$trustarmedR <-car::recode(WVS.TS$trustarmed,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustarmedR)
+WVS.TS$trustarmedR[WVS.TS$trustarmedR<1] <-NA
+table(WVS.TS$trustarmedR)
+
+#truts in police####
+WVS.TS$E069_06
+WVS.TS$trustpolice <-WVS.TS$E069_06
+table(WVS.TS$trustpolice )
+
+library(car)
+WVS.TS$trustpoliceR <-car::recode(WVS.TS$trustpolice,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustpoliceR)
+WVS.TS$trustpoliceR[WVS.TS$trustpoliceR<1] <-NA
+table(WVS.TS$trustpoliceR)
+
+
+#trust in pol parties####
+WVS.TS$E069_12
+WVS.TS$trustpolparties <-WVS.TS$E069_12
+table(WVS.TS$trustpolparties )
+
+library(car)
+WVS.TS$trustpolpartiesR <-car::recode(WVS.TS$trustpolparties,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustpolpartiesR)
+WVS.TS$trustpolpartiesR[WVS.TS$trustpolpartiesR<1] <-NA
+table(WVS.TS$trustpolpartiesR)
+
+
+#trust in courts
+WVS.TS$E069_17
+WVS.TS$trustcourts <-WVS.TS$E069_17
+table(WVS.TS$trustcourts )
+
+library(car)
+WVS.TS$trustcourtsR <-car::recode(WVS.TS$trustcourts,"1=4;2=3;3=2;4=1") 
+table(WVS.TS$trustpolpartiesR)
+WVS.TS$trustcourtsR[WVS.TS$trustcourtsR<1] <-NA
+table(WVS.TS$trustcourtsR)
+
+
+E069_02 armed forces
+E069_06 police
+E069_12 parties
+E069_17 courts
+E069_11 govt
+E069_07 congress
+
+
+#political trust variable
+
+WVS.TS$PolTrust<-rowMeans(cbind(WVS.TS$trustgovR,WVS.TS$trustcongR,WVS.TS$trustarmedR,
+                                WVS.TS$trustpolpartiesR,WVS.TS$trustcourtsR,
+                                WVS.TS$trustpoliceR),na.rm=TRUE)
+  
+  
+summary(WVS.TS$PolTrust)
+
+na.omit(WVS.TS$PolTrust)
+
+WVS.TS %>% drop_na(PolTrust) %>% 
+  ggplot(aes(x=PolTrust))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Public Institutions")+
+  geom_bar(position = 'stack')+facet_wrap(~perwaves) + theme_bw() +
+  geom_vline(xintercept = 3, linetype="solid", 
+             color = "blue")
+
+WVS.TS %>% drop_na(PolTrust) %>% 
+  ggplot(aes(x=PolTrust))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Public Institutions")+
+  geom_histogram()+facet_wrap(~perwaves) + theme_bw() +
+  geom_vline(xintercept = 3, linetype="solid", 
+             color = "blue") + stat_bin(bins= 25)
+
+
+WVS.TS %>% drop_na(PolTrust) %>% 
+  ggplot(aes(x=PolTrust))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Public Institutions")+
+  geom_boxplot(varwidth = TRUE)+facet_wrap(~perwaves) + theme_bw() 
+  
+WVS.TS %>% drop_na(PolTrust) %>% 
+  ggplot(aes(x=PolTrust))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Public Institutions")+
+  geom_boxplot(varwidth = TRUE)+facet_wrap(~perwaves) + theme_bw() 
+
+WVS.TS %>% drop_na(trustgovR) %>% 
+  ggplot(aes(x=trustgovR))+
+  ylab('Frequency')+
+  xlab("Citizens' Level of Confidence in Public Institutions")+
+  geom_boxplot(varwidth = TRUE)+facet_wrap(~perwaves) + theme_bw() 
